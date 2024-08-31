@@ -39,42 +39,88 @@ const grid = document.getElementById('grid');
 const playButton = document.getElementById('play-button');
 const form = document.querySelectorAll('form');
 const select = document.getElementById('select-level');
+const scoreElement = document.getElementById('score');
 
 
 
 
 //funzione per la creazionde della celle 
 
-const createCell = (cellNumber) => {
+const createCell = (cellNumber,) => {
 
     const cell = document.createElement('div');
     cell.className = 'cell';
     cell.innerText = cellNumber;
-
+    /* 
+    cell.style.width = `calc(100%/${size})`;
+    cell.style.height = `calc(100%/${size})`; //manipolo html 
+*/
     return cell;
 }
 
 
 
+//funzione per generare le bombe 
 
+
+const getRandomNumbers = (max, totalNumbers) => {
+    const randomNumbers = [];
+
+    while (bombs.length < totalNumbers) {
+
+        const randomNumbers = Math.floor(Math.random() * max) + 1;
+        bombs.push(randomNumbers);
+    }
+
+
+    return randomNumbers;
+
+
+}
+
+const generateBombs = (totalCells, totalBombs) => {
+
+    let bombs = [];
+
+    while (bombs.length < totalBombs) {
+
+        const randomNumbers = Math.floor(Math.random() * totalCells) + 1;
+        bombs.push(randomNumbers);
+
+
+    }
+
+
+
+    return bombs;
+
+
+
+}
 
 //funzione per il pulsante  
-const startGame = (event) => {
+const startGame = event => {
 
     //blocco l'invio 
     event.preventDefault();
 
     //svuota la griglia 
     //svuoto la grigli a
-    grid.innerText = '';
+    grid.innerHTML = '';
 
     //cambio il testo al bottone 
     playButton.innerText = 'Ricominica'
 
     const level = select.value;
+
+    //punteggio 
+    let score = 0;
     let rows;
     let cols;
+    const totalBombs = 16;
 
+    const totalCells = rows * cols;
+    const maxScore = totalCells - totalBombs;
 
     //per cambiare di livello imposta uno switch 
 
@@ -105,9 +151,20 @@ const startGame = (event) => {
 
 
 
+
+    //setto il valore qui :root è come se prendessi il documento html
+
+    const root = document.querySelector(':root');
+    //prendo l'elemento 
+
+    root.style.setProperty('--cols-per-row', cols);
+
+
+
+
     //devo generare 100 celle 
 
-    for (let i = 1; i <= 100; i++) {
+    for (let i = 1; i <= totalCells; i++) {
 
         //creo una cella 
 
@@ -116,12 +173,14 @@ const startGame = (event) => {
         cell.addEventListener('click', () => {
             console.log(cell.innerText);
             console.log(i);
+
+            //se è stata già cliccata,esci 
+            if (cell.classList.contains('clicked')) return;
+
             cell.classList.add('clicked');
+
+            scoreElement.innerText = ++score;
         });
-
-
-
-
 
         grid.appendChild(cell);
     }

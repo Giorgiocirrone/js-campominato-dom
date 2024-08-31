@@ -31,6 +31,10 @@ header {
 
 }
 
+.controls {
+    display: flex;
+
+}
 
 main {
 
@@ -40,7 +44,14 @@ main {
     align-items: center;
 }
 
+/*soluzione avanzata*/
 
+/*nelle root*/
+:root {
+
+    --cols-per-row: 10;
+    /*lo voglio cambiare con js */
+}
 
 
 
@@ -49,6 +60,7 @@ main {
 /*utilities*/
 
 .hidden {
+
 
 
     display: none;
@@ -120,11 +132,68 @@ main {
 /*le celle verranno generate */
 
 
-.cell {
+#grid .cell {
+
+    /*
+    height: 10%;
+    toldo da qui perchè con java posso manipolare queste proprietà css
+    width: 10%;*/
+
+    width: calc(100% / var(--cols-per-rows));
+    height: calc(100% / var(--cols-per-rows));
+    border: 1px solid black;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+}
+
+/*
+#grid.normal .cell{
+
+    width: calc(100%/9);
+    height: calc(100%/9);
+
+}
+
+/*tutte  le celle figlie di una grid con classe easy-normal-hard
+.cell.easy .cell{
+
+    width: 10%;
+    height: 10%;
+
+}
 
 
-    height: 50px;
-    width: calc(100% / 10);
 
-    border: 1px solid orange;
+.cell.hard .cell{
+
+    width: calc(100%/7);
+    height: calc(100%/7);
+
+} 
+
+
+
+.cell.clicked {
+
+    color: white;
+    background-color: dodgerblue;
+}
+
+
+
+/*2 opzione 
+
+quando chiamo la creazione della cella posso passare il level*/
+
+
+/*3 opzione centralizzare con il css */
+
+.cell.clicked {
+
+    color: white;
+    background-color: dodgerblue;
 }
