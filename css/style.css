@@ -22,11 +22,11 @@ body {
 
 header {
 
-    height: 100vh;
+    height: 10vh;
     padding: 15px;
     background-color: white;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
 
 }
@@ -39,6 +39,27 @@ main {
     justify-content: center;
     align-items: center;
 }
+
+
+
+
+
+
+
+/*utilities*/
+
+.hidden {
+
+
+    display: none;
+}
+
+
+
+
+
+
+
 
 
 /*Logo*/
@@ -91,7 +112,19 @@ main {
     align-items: center;
     justify-content: center;
 
+
+
 }
 
 
 /*le celle verranno generate */
+
+
+.cell {
+
+
+    height: 50px;
+    width: calc(100% / 10);
+
+    border: 1px solid orange;
+}

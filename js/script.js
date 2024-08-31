@@ -33,4 +33,110 @@ Fatevi sempre delle domande: sto ripetendo del codice? Questa funzione fa troppe
 
 
 
+//fase di preparazione prendo tutte le variabili 
+
+const grid = document.getElementById('grid');
+const playButton = document.getElementById('play-button');
+const form = document.querySelectorAll('form');
+const select = document.getElementById('select-level');
+
+
+
+
+//funzione per la creazionde della celle 
+
+const createCell = (cellNumber) => {
+
+    const cell = document.createElement('div');
+    cell.className = 'cell';
+    cell.innerText = cellNumber;
+
+    return cell;
+}
+
+
+
+
+
+//funzione per il pulsante  
+const startGame = (event) => {
+
+    //blocco l'invio 
+    event.preventDefault();
+
+    //svuota la griglia 
+    //svuoto la grigli a
+    grid.innerText = '';
+
+    //cambio il testo al bottone 
+    playButton.innerText = 'Ricominica'
+
+    const level = select.value;
+    let rows;
+    let cols;
+
+
+    //per cambiare di livello imposta uno switch 
+
+
+    switch (level) {
+
+        case 'hard':
+
+            rows = 7;
+            cols = 7;
+
+            break;
+
+        case 'normal':// questa potrebbe essere defalult 
+
+            rows = 9;
+            cols = 9;
+            break;
+
+        case 'easy':
+
+            rows = 10;
+            cols = 10;
+
+            break;
+
+    }
+
+
+
+    //devo generare 100 celle 
+
+    for (let i = 1; i <= 100; i++) {
+
+        //creo una cella 
+
+        const cell = createCell(i);
+
+        cell.addEventListener('click', () => {
+            console.log(cell.innerText);
+            console.log(i);
+            cell.classList.add('clicked');
+        });
+
+
+
+
+
+        grid.appendChild(cell);
+    }
+
+
+
+}
+
+
+//cambio il testo delle funzioni 
+form.addEventListener('submit', startGame)//dobbiamo evitare che si aggiorni la pagina 
+
+
+/* creazione delle celle */
+
+
+
 
